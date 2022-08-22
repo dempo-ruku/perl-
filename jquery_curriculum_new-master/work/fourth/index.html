@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <ul class="menu__list clearfix">
+        <li>
+          <p class="menu__list__title">Animal</p>
+          <ul class="menu__list__childList" style="display: none;">
+            <li>
+              <p class="menu__list__childList__title">Lion</p>
+            </li>
+            <li>
+              <p class="menu__list__childList__title">Zebra</p>
+            </li>
+            <li>
+              <p class="menu__list__childList__title">Elephant</p>
+            </li>
+            <li>
+              <p class="menu__list__childList__title">Rhino</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p class="menu__list__title">Plant</p>
+          <ul class="menu__list__childList" style="display: none;">
+            <li>
+              <p class="menu__list__childList__title">Cedar</p>
+            </li>
+            <li>
+              <p class="menu__list__childList__title">Olive</p>
+            </li>
+            <li>
+              <p class="menu__list__childList__title">Aloe</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="../../common/js/jquery.js"></script>
+    <script>
+      // 今回やるのはドロップメニューです。
+      // メニューをhoverすると隠れている中のメニューが表示され、メニューから離れると中のメニューが非表示されるプログラムです。
+      // 処理は関数化し、hoverしたら用意した関数を呼び出すようにしてください。
+      // [使用するメソッド]
+      // .hover(関数, 関数) 要素の上にマウスカーソルが乗ると第1引数の関数を実行し、マウスカーソルから離れると第2引数の関数を実行します。
+      // .slideDown() 要素がスライドしながら表示されます。
+      // .slideUp() 要素がスライドしながら非表示されます。
+      // .children() 要素の子要素を取得します。
+      // .stop() 現在動作中のアニメーション処理を全て中止します。
+      // [確認してほしい挙動]
+      // ・ホバー時にリストがスライドしながら表示されること
+      // ・連続で何回もホバーした時、手を止めているのにリストがスライドし続けないか
+      // ・出てきたリストの上にホバーできるか
+      // ※必ずレビュー前に上記挙動が問題ないか確認すること
+      $(function() {
+        $(".menu__list").children("li").hover(
+          function () {
+            $(this).children("ul").stop().slideDown();
+          },
+          function () {
+            $(this).children("ul").stop().slideUp();
+          }
+        );
+      })
+    </script>
+  </body>
+</html>
