@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <p class="modal-show">Click</p>
+      <div class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-text">MODAL WINDOW</div>
+          <button type="button" class="modal-close">x</button>
+        </div>
+      </div>
+    </div>
+    <script src="../../common/js/jquery.js"></script>
+    <script>
+      // 今回やるのはモーダルです。
+      // .modal-show をクリックすることで .modal をfadeInさせる。
+      // .modal-close をクリックで .modal をfadeOutさせる。
+      // .click() クリック時のイベントを登録する。
+      // .fadeIn() 一定時間かけてフェードインする。
+      // .fadeOut() 一定時間かけてフェードアウトする。
+      $(function() {
+        $('.modal-show').click(function(){
+          $('.modal').fadeIn(1000);
+        })
+        $('.modal-close').click(function(){
+          $('.modal').fadeOut(1000);
+        })
+      })
+    </script>
+  </body>
+</html>
