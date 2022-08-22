@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="http://gizumo-inc.github.io/sample/javascript-lesson/jquery-curriculum/common/css/reset.css">
+    <link rel="stylesheet" href="http://gizumo-inc.github.io/sample/javascript-lesson/jquery-curriculum/common/css/base.css">
+    <link rel="stylesheet" href="http://gizumo-inc.github.io/sample/javascript-lesson/jquery-curriculum/answer/first//css/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1 class="title">jQuery</h1>
+      <h2 class="sub-title">Q1</h2>
+      <div class="question">
+        <div class="btn" id="q1">Q1</div>
+      </div>
+      <h2 class="sub-title">Q2</h2>
+      <div class="question">
+        <div class="btn" id="q2">Q2</div>
+      </div>
+      <h2 class="sub-title">Q3</h2>
+      <div class="question">
+        <div class="btn" id="q3">Q3</div>
+      </div>
+      <h2 class="sub-title">Q4</h2>
+      <div class="question">
+        <div class="btn" id="q4">Q4</div>
+      </div>
+      <h2 class="sub-title">Q5</h2>
+      <div class="question">
+        <div class="btn" id="q5">Q5</div>
+      </div>
+      <h2 class="sub-title">Q6</h2>
+      <div class="question">
+        <ul class="list" id="q6">
+          <li>Q6-1</li>
+          <li>Q6-2</li>
+          <li>Q6-3</li>
+          <li>Q6-4</li>
+        </ul>
+      </div>
+      <h2 class="sub-title">Q7</h2>
+      <div class="question">
+        <div class="btn" id="q7" data-text="jQuery">Q7</div>
+      </div>
+    </div>
+    <script src="http://gizumo-inc.github.io/sample/javascript-lesson/jquery-curriculum/common/js/jquery.js"></script>
+    <script>
+      $(function() {
+        // $(function() { });　DOMが準備されてからjQueryを実行するready構文の省略形になります。
+        // jQueryを書くときはこの中に実際の処理を書くことになる。詳しくはこちら( http://www.jquerystudy.info/tutorial/01/06.html )
+        $('#q1').css('color', 'red');
+        // ちゃんと処理が実行されていれば<div id='q1'>q1</div>の文字色が赤色になっているはず。
+        // $('#q1')　jQueryの効果を効かせたいDOMを$('')でくくる。
+        // $('#q1')　この中の#q1の部分を「セレクタ」と呼ぶ。
+        // idの場合は#,classの場合は.をつける。cssと一緒。
+        // .css('color', 'red')　対象となっているDOMのcolorをredに変える。（今回はcolorだがcssで出来ることは全て出来る。）
+        // このように.〇〇()と書くものを「メソッド」と呼ぶ。
+        $('#q2').click(function() {
+          $(this).css('background-color', 'pink');
+        });
+        // <div class="btn" id="q2">q2</div>をクリックした後に背景色が変わるはず。
+        // .click();　clickメソッドは()の中に関数を書くと指定した要素をクリックした後にその関数を実行するという処理をやってくれる。関数とは何だという方はjavascript-lessonの前の項にもどりましょう。
+        // $(this)　これは超簡単に書くと、この記述の前に指定されたDOMを指定する。この場合クリックした要素である$('#q2')のこと。
+        $('#q3').click(function() {
+          $(this).prepend('DOMの中の前')
+                 .append('DOMの中の後')
+                 .before('DOMの前')
+                 .after('DOMの後');
+        });
+        // クリックすればわかるはず。DOMの挿入位置をよく確認して下さい。
+        // なんだこの書き方はと思った人は「jQuery メソッドチェイン」でググってください。
+        $('#q4').click(function() {
+          $(this).addClass('large');
+        });
+        // addClass()　対象のDOMにクラスを追加するメソッドです。（引数のクラスに.をつけないので注意）
+        // 現場だとcss()よりもこちらを使うことの方が多い。なぜならば、css()よりもjavascript側の記述量が少なく、使い回しが効くためである。
+        $('#q5').click(function() {
+          $(this).animate({
+            'marginLeft': 100,
+            'marginTop': 100
+          }, 2000);
+        });
+        // animateメソッドはcssのプロパティを一定時間かけて変更するメソッドである。
+        // 'marginLeft': 100,
+        // 'marginTop': 100
+        // この部分でプロパティを定義し、コロンの後に値を書く。そしてカンマの後にミリ秒を書き、そのアニメーション全体の時間を決める。
+        // CSSの名前の書き方が若干違ってることに注意してください。animateメソッドはキャメルケースになります。
+        // 実はこのanimateメソッドはよーく見ると引数を2つ持つメソッドなのです。
+        // .animate({〜}, 2000);　さっきも言ったように引数には関数や値を渡すことも出来るし、「{}」オブジェクトを渡すことも出来ます。
+        // オブジェクトは難しいので今は説明しませんが、「引数2つとること出来るんだー、ふーん」ぐらいに考えておいて下さい。（ちなみに関数を作る際に引数は何個でも作れます。）
+        $('#q6').find('li').click(function() {
+          var targetNum = $(this).index();
+          console.log(targetNum);
+          alert(targetNum);
+        });
+        // #q7内のli要素をクリックした際にその要素が何番目の要素かアラートとコンソールで教えてくれるはずです。
+        // find()　findメソッドは指定されたDOM要素から引数に渡された要素を（ここではli）を取ってくるメソッドです。
+        // index()　はその要素が何番目の要素か教えてくれるメソッドです。慣れないと理解しづらいのですが、最初の要素をクリックすると0という値が返ってきますが、それは正常な挙動です。
+        // var 〜　変数を定義する宣言です。ここでは$(this).index()で取得した値をtargetNumという変数に代入しています。この後にalertやconsole.logで使用するため、変数化しておくと値を使い回し出来るので非常に良い。
+        // console.log()　chrome developer toolのconsoleのタブに引数の値が出力されます。非常に重要です。
+        // alert() 引数の値をアラートとして表示します。これまた非常に重要です。
+        $('#q7').click(function() {
+          var text = $(this).data('text');
+          console.log(text);
+        });
+        // data() その要素のdata属性を取得もしくはセットするメソッド。
+        // DOMを見てもらうと data-text='jQuery' といった記述がある。これはDOMに特殊な値を設定する方法で、jQueryを使うことによって簡単に取得出来るのである。
+        // 取得方法は data('text')で取得することが出来る（今回の場合）。HTMLのdata-〇〇="hoge"はjQueryのdata('〇〇')でhogeが取得できる
+        // また上には書いていないが、$('DOM').data('hoge', 'fuga')といった風に書くことによって、DOMのdata-hoge属性にfugaをセットすることが出来る。
+        // html的に書けば<div data-hoge='fuga'></div>です。
+      });
+    </script>
+  </body>
+</html>

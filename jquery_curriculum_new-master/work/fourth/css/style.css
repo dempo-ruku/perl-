@@ -1,0 +1,37 @@
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.wrapper {
+  padding: 20px;
+}
+.menu__list {
+  margin: 0 auto;
+  width: 400px;
+}
+.menu__list > li {
+  float: left;
+  width: 50%;
+  border-left: 1px #eee solid;
+}
+.menu__list > li:first-child {
+  border-left: none;
+}
+.menu__list__title {
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fff;
+  cursor: pointer;
+}
+.menu__list__childList > li {
+  border-top: 1px #eee solid;
+}
+.menu__list__childList__title {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+}

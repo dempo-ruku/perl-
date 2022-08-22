@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <div class="header">
+          <p class="header__title">Search Books!</p>
+        </div>
+        <div class="search">
+          <div class="search__text">
+            <input type="text" class="search__text__input" placeholder="検索する" data-js="search-word">
+          </div>
+          <button class="search__btn" data-js="search-btn">検索する</button>
+        </div>
+        <div class="message" data-js="error-message"></div>
+        <ul class="lists" data-js="book-lists"></ul>
+      </div>
+    </div>
+    <script src="../../common/js/jquery.js"></script>
+    <script src="./js/appid.js"></script>
+    <script>
+      // 楽天ブックスの総合検索APIを使って製作してください。
+      // answerの挙動を良く見てね！
+      //
+      // 下記URLにAPIの仕様が載っているので、ブラウザで開いて参考にしてください。
+      // https://webservice.rakuten.co.jp/documentation/books-total-search
+      //
+      //
+      // [使うメソッド]
+      // e.preventDefault イベントをキャンセルするためのメソッド。今回はaタグの遷移を無効化します。
+      // on('click') onメソッドを使うことで、動的に出力される要素に対してもイベント登録が行えます。
+      // $.each(配列, function functionName() {}) 配列に対しての繰り返し処理が行えます。
+      // $.ajax({}) 外部ファイルやURLに対してデータをリクエストすることができます。
+      // 以下は今回使う$.ajaxの基本的な形です。
+      //
+      // $.ajax({
+      //   url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+      //   type: 'GET',
+      //   datatype: 'json',
+      //   data: {
+      //     // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
+      //     applicationId: appId, (今回はこの変数をIDとして使用します) ※メンターから別途渡されるファイルを読み込んでください。
+      //     booksGenreId: '001'
+      //   },
+      // }).done(function(data) {
+      //   // この中にデータ取得後の動きを記述していきます。
+      //   console.log(data);
+      // });
+      //
+      //
+      // $.ajaxによってデータが取得できたら、必要なデータ(作品名とか作者名とか)を取得します。
+      // 取得できたらHTMLに<ul class='lists'></ul>を用意しているので、下のテンプレに沿ってデータを入れ込みましょう。
+      // <li class="lists__item">
+      //  <div class="lists__item__inner">
+      //    <a href="" class="lists__item__link" target="_blank">
+      //      <img src="" class="lists__item__img" alt="">
+      //      <p class="lists__item__detail">作品名：</p>
+      //      <p class="lists__item__detail">作者　：</p>
+      //      <p class="lists__item__detail">出版社：</p>
+      //    </a>
+      //  </div>
+      // </li>
+      //
+      // 取得できた書籍の件数をもとに、ページャを作成しましょう
+      // ページャの条件
+      // ├ 「現在のページ数」と「全てのページ数」が表示されている
+      // ├ 「前へ」と「次へ」のボタンがある
+      // ├ 1ページ目では「前へ」に、最後のページでは「次へ」にdisabledクラスをつけて非活性（使用不能）にする
+      // └ 1ページしかない場合はどちらもdisabledクラスをつけて非活性にする
+      //
+      // ページャのテンプレート
+      // <div class="pager" data-js="pager">
+      //   <div class="counter">
+      //     <span class="counter-current"></span>/<span class="counter-all"></span>
+      //   </div>
+      //   <div class="btn-wrapper">
+      //     <a class="btn-item" data-js="page-prev" href="">前へ</a>
+      //     <a class="btn-item" data-js="page-next" href="">次へ</a>
+      //   </div>
+      // </div>
+    </script>
+  </body>
+</html>

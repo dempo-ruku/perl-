@@ -1,0 +1,69 @@
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.wrapper {
+  padding: 20px;
+}
+.contents {
+  margin: 0 auto;
+  width: 300px;
+}
+.title {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+}
+.select-wrapper {
+  margin: 10px 0;
+  text-align: right;
+}
+.select {
+  padding: 10px;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  background-color: darkcyan;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.list > li {
+  border-top: 1px #eee solid;
+}
+.article {
+  position: relative;
+  display: table;
+  padding: 10px;
+  width: 100%;
+  background-color: #fff;
+  table-layout: fixed;
+}
+.article-icon {
+  display: table-cell;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+}
+.article-icon.is-bootstrap { background-image: url(../img/bootstrap.png); }
+.article-icon.is-material-ui { background-image: url(../img/material-ui.png); }
+.article-icon.is-react { background-image: url(../img/react.png); }
+.article-icon.is-aurelia { background-image: url(../img/aurelia.png); }
+.article-icon.is-ruby-on-rails { background-image: url(../img/ruby-on-rails.png); }
+.article-icon.is-laravel { background-image: url(../img/laravel.png); }
+.article-icon.is-phalcon { background-image: url(../img/phalcon.png); }
+.article-icon.is-django { background-image: url(../img/django.png); }
+.article-icon.is-play { background-image: url(../img/play.png); }
+.article-name {
+  display: table-cell;
+  padding-left: 20px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  vertical-align: middle;
+}
