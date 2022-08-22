@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <ul class="nav clearfix">
+        <li class="is-pink">HOME</li>
+        <li class="is-green">NEWS</li>
+        <li class="is-yellow">MYPAGE</li>
+      </ul>
+      <ul class="contents">
+        <li class="is-pink">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+        <li class="is-green is-hidden">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+        <li class="is-yellow is-hidden">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+      </ul>
+    </div>
+    <script src="../../common/js/jquery.js"></script>
+    <script>
+      // 今回やるのはタブメニューです。
+      // navの小要素であるliをクリックして、contents内の小要素であるli要素を表示させる。
+      // .index() 要素のindexを取得します。
+      // .eq() 引数に応じたindexの要素を指定します。
+      // .addClass() クラスを追加します。
+      // .removeClass() クラスを削除します。
+      $(function() {
+        $('.nav li').click(function(){
+          var index = $(this).index();
+
+          $(".contents li").addClass('is-hidden');
+          $(".contents li").eq(index).removeClass('is-hidden');
+        })
+      })
+    </script>
+  </body>
+</html>
+
