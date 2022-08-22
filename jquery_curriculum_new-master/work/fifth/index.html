@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="contents">
+        <p class="title">Frameworks</p>
+        <div class="select-wrapper">
+          <select class="select">
+            <option value="all">All</option>
+            <option value="css">CSS</option>
+            <option value="javascript">JavaScript</option>
+            <option value="php">PHP</option>
+            <option value="ruby">Ruby</option>
+            <option value="python">Python</option>
+            <option value="scala">Scala</option>
+          </select>
+        </div>
+        <ul class="list">
+          <li data-category-type="css">
+            <a href="http://getbootstrap.com/" class="article">
+              <i class="article-icon is-bootstrap"></i>
+              <p class="article-name">Bootstrap</p>
+            </a>
+          </li>
+          <li data-category-type="ruby">
+            <a href="http://rubyonrails.org/" class="article">
+              <i class="article-icon is-ruby-on-rails"></i>
+              <p class="article-name">Ruby on Rails</p>
+            </a>
+          </li>
+          <li data-category-type="php">
+            <a href="https://phalconphp.com/ja/" class="article">
+              <i class="article-icon is-phalcon"></i>
+              <p class="article-name">Phalcon</p>
+            </a>
+          </li>
+          <li data-category-type="javascript">
+            <a href="https://facebook.github.io/react/" class="article">
+              <i class="article-icon is-react"></i>
+              <p class="article-name">React</p>
+            </a>
+          </li>
+          <li data-category-type="scala">
+            <a href="https://www.playframework.com/" class="article">
+              <i class="article-icon is-play"></i>
+              <p class="article-name">Play</p>
+            </a>
+          </li>
+          <li data-category-type="javascript">
+            <a href="http://aurelia.io/" class="article">
+              <i class="article-icon is-aurelia"></i>
+              <p class="article-name">Aurelia</p>
+            </a>
+          </li>
+          <li data-category-type="python">
+            <a href="http://djangoproject.jp/" class="article">
+              <i class="article-icon is-django"></i>
+              <p class="article-name">Django</p>
+            </a>
+          </li>
+          <li data-category-type="css">
+            <a href="http://www.material-ui.com/#/" class="article">
+              <i class="article-icon is-material-ui"></i>
+              <p class="article-name">Material UI</p>
+            </a>
+          </li>
+          <li data-category-type="php">
+            <a href="https://laravel.com/" class="article">
+              <i class="article-icon is-laravel"></i>
+              <p class="article-name">Laravel</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="../../common/js/jquery.js"></script>
+    <script>
+      // 今回やるのはソート機能です。
+      // selectボックスをクリックして言語を選び、その言語と関係のあるリストだけが表示されるプログラムです。
+      // [処理の流れ]
+      // ・セレクトボックスをクリックする。
+      // ・セレクトボックスのvalueとliのdata-category-typeが一致しているものをだけ表示させる。
+      // ・Allを選択した場合のみ全てのliを表示させる。
+      // ・処理は関数化し、クリックしたら用意した関数を呼び出すようにしてください。
+      // [使うメソッド]
+      // .show() 要素を表示させる
+      // .hide() 要素を隠す
+      // .val() 要素のvalueを取得
+      // .data('') DOM要素にあるdata-~を取得できる
+      // .change() セレクトボックスの値の変更をキャッチする関数
+      // $().each(function(index, element){}) DOM要素を1つずつループ処理をする。
+      // eachには引数を二つ持たせることができ、第一引数はDOM要素のインデックス番号、第二引数ではDOM要素自体が取得できます
+      $(function() {
+        function sort(){
+          $('.select').change(function(){
+          var val = $(this).val();
+          if(val === "all") {
+            $('.list li').show();
+          } else {
+            $('.list li').each(function(index, element) {
+              if(val === $(element).data('category-type')) {
+                $(element).show();
+              } else {
+                $(element).hide();
+              }
+            })
+          }})
+        }
+        $('.select').on('click', sort);
+      })
+    </script>
+  </body>
+</html>
