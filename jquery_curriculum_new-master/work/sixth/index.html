@@ -87,6 +87,132 @@
       //     <a class="btn-item" data-js="page-next" href="">次へ</a>
       //   </div>
       // </div>
+
+      $( function() {
+        var keyword = '';
+        var pageNum = 0;
+        var pageCount = 0;
+
+        function deleteHtml() {
+          $('.lists, .message').empty();
+          $('.pager').remove();
+        }
+
+        function listData(data) {
+          var list = '';
+          $.each(data.Items, function(index, val) {
+            if(data.count > 0){
+              list +=
+                '<li class="lists__item">' +
+                  '<div class="lists__item__inner">' +
+                    '<a href="' + val.Item.itemUrl + '" class="lists__item__link" target="_blank">' +
+                      '<img src="' + val.Item.largeImageUrl + '" class="lists__item__img" alt="">' +
+                      '<p class="lists__item__detail">作品名：' + val.Item.title + '</p>' +
+                      '<p class="lists__item__detail">作者　：' + val.Item.author + '</p>' +
+                      '<p class="lists__item__detail">出版社：' + val.Item.publisherName + '</p>' +
+                    '</a>' +
+                  '</div>' +
+                '</li>';
+            } else if(data.page === 0) {
+              deleteHtml();
+              $('.message').html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>'); //メッセージクラスにhtmlメソッドを使いテキストを表示させる
+            };
+          });
+          $('.lists').append(list);
+          pager(data);
+        }
+
+        function pager(data) {
+          pageCount = data.pageCount;
+          var pager =
+            '<div class="pager" data-js="pager">' +
+              '<div class="counter">' +
+                '<span class="counter-current"> ' + pageNum + ' </span>' +
+                '/' +
+                '<span class="counter-all">' + pageCount + '</span>' +
+              '</div>' +
+              '<div class="btn-wrapper">' +
+                '<a class="btn-item" data-js="page-prev" href="">前へ</a>' +
+                '<a class="btn-item" data-js="page-next" href="">次へ</a>' +
+              '</div>' +
+            '</div>';
+          $('.container').append(pager);
+          disabled();
+        }
+
+        function disabled() {
+          if (pageNum === 1) {
+            $('[data-js = "page-prev"]').addClass('disabled');
+          }
+          if(pageNum === pageCount) {
+            $('[data-js = "page-next"]').addClass('disabled');
+          }
+        }
+
+        var mistake = {
+          none : '<p class="error-message">検索文字が入力されていません。</p>',
+          time : '<p class="error-message">リクエスト過多です。しばらく時間を置いてからお試しください。</p>',
+          net : '<p class="error-message">通信に失敗しました。インターネットの接続をご確認ください。</p>',
+        };
+
+        function errorText(error) {
+          switch(error.status) {
+            case 0:
+              $('.message').html(mistake.net)
+            break;
+            case 400:
+              $('.message').html(mistake.none);
+            break;
+            case 429:
+              $('.message').html(mistake.time);
+            break;
+          }
+        }
+
+        function searchBooks() {
+          deleteHtml();
+          $.ajax({
+            url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+            type: 'GET',
+            datatype: 'json',
+            data: {
+              // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
+              applicationId: appId,
+              booksGenreId: '001',
+              keyword: keyword,
+              hits: 20,
+              page: pageNum,
+            },
+          }).done(function(data) {
+          // この中にデータ取得後の動きを記述していきます。
+            listData(data);
+          }).fail(function (error) {
+            errorText(error);
+          });
+        };
+
+        $('.search__btn').on('click',function() {
+          keyword = $('.search__text__input').val();
+          pageNum = 1;
+          searchBooks();
+        });
+
+        $(document).on('click', '.btn-item', function(e) {
+          e.preventDefault();
+          var btnData = $(this).data('js');
+          if (btnData === 'page-next'){
+            if (pageNum < pageCount) {
+              pageNum++;
+              searchBooks();
+            }
+          } else if (btnData === 'page-prev') {
+            if(pageNum > 1) {
+              pageNum--;
+              searchBooks();
+            }
+          }
+        });
+      });
     </script>
   </body>
 </html>
