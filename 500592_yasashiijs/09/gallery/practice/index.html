@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>インプレス いちばんやさしいJavaScriptの教本</title>
 <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js"></script>
 </head>
 <body>
   <div id="gallery">
@@ -12,6 +15,37 @@
     <div class="thumb">
     </div>
   </div>
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
+  <script>
+    $(function() {
+      var album = [
+        {src: 'img/1.jpg', msg: '山道の緑が気持ちいい'},
+        {src: 'img/2.jpg', msg: '階段きつかった'},
+        {src: 'img/3.jpg', msg: '高尾山薬王院'},
+        {src: 'img/4.jpg', msg: '帰りはロープウェイでスイスイ'},
+        {src: 'img/5.jpg', msg: '〆のお蕎麦です'}
+      ];
+
+      $('.main').append('<img>')
+                .append('<p>');
+      $('.main img').attr('src', album[0].src)
+                    .attr('alt', album[0].msg);
+      $('.main p').append(album[0].msg);
+
+      for (var i = 0; i < album.length; i++) {
+        $('.thumb').append('<img src=' + album[i].src + ' alt=' + album[i].msg + '>');
+      }
+
+      $('.thumb img').on('click', function() {
+        $('.main p').empty();
+        var src = $(this).attr('src');
+        var msg = $(this).attr('alt');
+        console.log(src, msg);
+          $('.main img').attr('src', src)
+                        .attr('alt', msg);
+          $('.main p').append(msg);
+      })
+    })
+  </script>
 </body>
 </html>
