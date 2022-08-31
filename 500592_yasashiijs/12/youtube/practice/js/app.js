@@ -2,10 +2,13 @@ const KEY = 'AIzaSyDs9OtHlLc6fs-WjPjMbGr-zex1Rbh0YUE';
 var url = 'https://www.googleapis.com/youtube/v3/search?';
 url += 'type=video';
 url += '&part=snippet';
-url += '&q=music';
+url += '&regionCode=JP';
+url += '&maxResults=10';
+url += '&chart=mostPopular';
+// url += '&q=music';
+url += '&order=rating';
 url += '&videoEmbeddable=true';
 url += '&videoSyndicated=true';
-url += '&maxResults=6';
 url += '&key=' + KEY;
 
 $(function () {
@@ -15,6 +18,7 @@ $(function () {
   }).done(function(data) {
     if (data.items) {
       setData(data);
+      console.log(data);
     } else {
       console.log(data);
       alert('該当するデータが見つかりませんでした');
@@ -36,4 +40,9 @@ function setData(data) {
   }
 
   $('#videoList').html(result);
+  $('#videoList').slick({
+    autoplay:true,
+    autoplaySpeed:3000,
+    dots: true
+  });
 }
